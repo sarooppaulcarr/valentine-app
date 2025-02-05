@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import caughtImage from "./images/caught.png";
 import "./App.css";
 
 function App() {
   const [isValentine, setIsValentine] = useState(true);
+  const [showImage, setShowImage] = useState(false);
 
   const handleYesClick = () => {
     setIsValentine(false);
+    setShowImage(true);
   };
 
   const handleNoHover = (e) => {
@@ -19,7 +22,20 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1>Will you be my {isValentine ? "Valentine" : "Wife"}?</h1>
+        {showImage && (
+          <img
+            src={caughtImage}
+            alt="caught in 4k!"
+            className="caught-image"
+          />
+        )}
+        <h1>
+          Will you be my{" "}
+          <span className={!isValentine ? "circled" : ""}>
+            {isValentine ? "Valentine" : "Wife"}
+          </span>
+          ?
+        </h1>
         <div className="buttons">
           <button className="yesButton" onClick={handleYesClick}>
             Yes
