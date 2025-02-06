@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import caughtImage from "./images/caught.png";
+import caughtImage from "./images/caught.png"; // Import heart image
+import congratsImage from "./images/congrats.png"; // Import congrats image
 import "./App.css";
 
 function App() {
   const [isValentine, setIsValentine] = useState(true);
   const [showImage, setShowImage] = useState(false);
+  const [yesClickCount, setYesClickCount] = useState(0);
 
   const handleYesClick = () => {
-    setIsValentine(false);
-    setShowImage(true);
+    setYesClickCount(yesClickCount + 1);
+    if (yesClickCount === 0) {
+      setIsValentine(false);
+      setShowImage(true);
+    }
   };
 
   const handleNoHover = (e) => {
@@ -23,11 +28,16 @@ function App() {
     <div className="App">
       <div className="container">
         {showImage && (
-          <img
-            src={caughtImage}
-            alt="caught in 4k!"
-            className="caught-image"
-          />
+          <>
+            {yesClickCount === 1 ? (
+              <img src={caughtImage} alt="Heart" className="caught-image" />
+            ) : (
+              <>
+                <img src={congratsImage} alt="Congrats" className="congrats-image" />
+                <p className="congrats-text">CONGRATS! YOU ALREADY ARE!</p>
+              </>
+            )}
+          </>
         )}
         <h1>
           Will you be my{" "}
